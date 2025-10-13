@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+</head>
+
+<body>
+
+    <script>
+        // 1. Check Even or Odd
+        let num1 = 7;
+        if (num1 % 2 === 0) {
+            console.log("Even");
+        } else {
+            console.log("Odd");
+        }
+
+        // 2. Positive, Negative, or Zero
+        let num2 = -4;
+        if (num2 > 0) {
+            console.log("Positive");
+        } else if (num2 < 0) {
+            console.log("Negative");
+        } else {
+            console.log("Zero");
+        }
+
+        // 3. Find Maximum of Two Numbers
+        let a = 12, b = 15;
+        if (a > b) {
+            console.log(a);
+        } else {
+            console.log(b);
+        }
+
+        // 4. Find Maximum of Three Numbers
+        let x = 42, y = 55, z = 13;
+        if (x >= y && x >= z) {
+            console.log(x);
+        } else if (y >= x && y >= z) {
+            console.log(y);
+        } else {
+            console.log(z);
+        }
+
+        // 5. Check Leap Year
+        let year = 2024;
+        if ((year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0)) {
+            console.log("Leap Year");
+        } else {
+            console.log("Not a Leap Year");
+        }
+
+        // 6. Check Voting Eligibility
+        let age = 16;
+        if (age >= 18) {
+            console.log("Eligible to vote");
+        } else {
+            console.log("Not eligible to vote");
+        }
+
+        // 7. Check Divisibility by 5 and 11
+        let num3 = 55;
+        if (num3 % 5 === 0 && num3 % 11 === 0) {
+            console.log("Divisible by both 5 and 11");
+        } else {
+            console.log("Not divisible by both 5 and 11");
+        }
+
+        // 8. Check Alphabet, Digit, or Special Character
+        let char1 = '@';
+        if ((char1 >= 'a' && char1 <= 'z') || (char1 >= 'A' && char1 <= 'Z')) {
+            console.log("Alphabet");
+        } else if (char1 >= '0' && char1 <= '9') {
+            console.log("Digit");
+        } else {
+            console.log("Special Character");
+        }
+
+        // 9. Check Vowel or Consonant
+        let ch = 'A';
+        if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z')) {
+            if (ch === 'a' || ch === 'e' || ch === 'i' || ch === 'o' || ch === 'u' ||
+                ch === 'A' || ch === 'E' || ch === 'I' || ch === 'O' || ch === 'U') {
+                console.log("Vowel");
+            } else {
+                console.log("Consonant");
+            }
+        } else {
+            console.log("Not an alphabet");
+        }
+
+        // 10. Check Uppercase or Lowercase Alphabet
+        let char2 = 'G';
+        if (char2 >= 'A' && char2 <= 'Z') {
+            console.log("Uppercase");
+        } else if (char2 >= 'a' && char2 <= 'z') {
+            console.log("Lowercase");
+        } else {
+            console.log("Not an alphabet");
+        }
+
+        // 11. Check Weekday Name
+        let dayNum = 4;
+        let weekDay = "";
+
+        switch (dayNum) {
+            case 1: weekDay = "Monday";
+                break;
+            case 2: weekDay = "Tuesday";
+                break;
+            case 3: weekDay = "Wednesday";
+                break;
+            case 4: weekDay = "Thursday";
+                break;
+            case 5: weekDay = "Friday";
+                break;
+            case 6: weekDay = "Saturday";
+                break;
+            case 7: weekDay = "Sunday";
+                break;
+            default: weekDay = "Invalid";
+        }
+        console.log(weekDay);
+
+        // 12. Check Month Name and Days
+        let monthNum = 9;
+        let monthName = "";
+        let days = 0;
+
+        switch (monthNum) {
+            case 1: monthName = "January"; days = 31; break;
+            case 2: monthName = "February"; days = 28; break;
+            case 3: monthName = "March"; days = 31; break;
+            case 4: monthName = "April"; days = 30; break;
+            case 5: monthName = "May"; days = 31; break;
+            case 6: monthName = "June"; days = 30; break;
+            case 7: monthName = "July"; days = 31; break;
+            case 8: monthName = "August"; days = 31; break;
+            case 9: monthName = "September"; days = 30; break;
+            case 10: monthName = "October"; days = 31; break;
+            case 11: monthName = "November"; days = 30; break;
+            case 12: monthName = "December"; days = 31; break;
+            default: monthName = "Invalid"; days = 0;
+        }
+        console.log(`${monthName} has ${days} days`);
+
+        // 13. Check Grade of Student
+        let marks = 72;
+        if (marks >= 90) console.log("Grade A");
+        else if (marks >= 75) console.log("Grade B");
+        else if (marks >= 60) console.log("Grade C");
+        else if (marks >= 40) console.log("Grade D");
+        else console.log("Grade F");
+
+        // 14. Check Leap Century Year
+        let year2 = 2025;
+        if (year2 % 100 === 0) {
+            if (year2 % 400 === 0) {
+                console.log("Leap Century Year");
+            } else {
+                console.log("Not a Leap Century Year");
+            }
+        } else {
+            console.log("Not a Century Year");
+        }
+
+        // 15. Check Even/Odd Days in Month
+        let month = 4; //  April
+        days = 0;
+
+        switch (month) {
+            case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+                days = 31; break;
+            case 4: case 6: case 9: case 11:
+                days = 30; break;
+            case 2:
+                days = 28; break;
+            default:
+                days = -1;
+        }
+        if (days === -1)
+            console.log("Invalid month number");
+        else
+            console.log(days % 2 === 0 ? "Even number of days" : "Odd number of days");
+
+
+        // 16. Check Eligibility for Driving License
+        let age2 = 20;
+        if (age2 >= 18) {
+            console.log("Eligible for Driving License");
+        } else {
+            console.log("Not eligible for Driving License");
+        }
+
+        // 17. Check Pass or Fail
+        let stuMarks = 38;
+        if (stuMarks >= 40) {
+            console.log("Pass");
+        } else {
+            console.log("Fail");
+        }
+
+        // 18. Electricity Bill Calculation
+        let units = 123;
+        let bill = 0;
+        if (units <= 100) {
+            bill = units * 5;
+        }
+        else if (units <= 200) {
+            bill = 100 * 5 + (units - 100) * 7;
+        }
+        else {
+            bill = 100 * 5 + 100 * 7 + (units - 200) * 10;
+        }
+        console.log("Electricity Bill:", bill);
+
+    </script>
+</body>
+
+</html>
