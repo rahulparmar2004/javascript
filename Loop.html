@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. Print 1 to N
+        console.log("1. Print 1 to N");
+        let N = 5;
+        for (let i = 1; i <= N; i++) {
+            console.log(i);
+        }
+
+        // 2. Print Even Numbers
+        console.log("2. Print Even Numbers");
+        N = 10;
+        for (let i = 2; i <= N; i += 2) {
+            console.log(i);
+        }
+
+        // 3. Print Odd Numbers
+        console.log("3. Print Odd Numbers");
+        N = 10;
+        for (let i = 1; i <= N; i += 2) {
+            console.log(i);
+        }
+
+        // 4. Sum of N Natural Numbers
+        N = 10;
+        let sum = 0;
+        for (let i = 1; i <= N; i++) {
+            sum += i;
+        }
+        console.log("Sum of Natural:", sum);
+
+        // 5. Sum of Even Numbers
+        sum = 0;
+        N = 5;
+        for (let i = 2; i <= N; i += 2) {
+            sum += i;
+        }
+        console.log("Sum Even:", sum);
+
+        // 6. Sum of Odd Numbers
+        sum = 0;
+        N = 10;
+        for (let i = 1; i <= N; i += 2) {
+            sum += i;
+        }
+        console.log("Sum Odd:", sum);
+
+        // 7. Factorial of a Number
+        N = 5;
+        let fact = 1;
+        for (let i = 1; i <= N; i++) {
+            fact *= i;
+        }
+        console.log("Factorial of 5:", fact);
+
+        // 8. Reverse a Number
+        let num = 1234;
+        let rev = 0;
+        let ans = 0;
+        while (num > 0) {
+            ans = num % 10;
+            rev = rev * 10 + ans;
+            num = Math.floor(num / 10);
+        }
+        console.log("Reverse:", rev);
+
+        // 9. Count Digits
+        let count = 0;
+        let temp = 12345;
+        while (temp > 0) {
+            temp = Math.floor(temp / 10);
+            count++;
+        }
+        console.log("Total digits:", count);
+
+        // 10. Sum of Digits
+        num = 1234;
+        sum = 0;
+        while (num > 0) {
+            sum += num % 10;
+            num = Math.floor(num / 10);
+        }
+        console.log("Sum Digits:", sum);
+
+        // 11. Product of Digits
+        num = 1234;
+        let prod = 1;
+        while (num > 0) {
+            prod *= num % 10;
+            num = Math.floor(num / 10);
+        }
+        console.log("Product Digits:", prod);
+
+        // 12. Palindrome Number
+        num = 121;
+        temp = num;
+        let reverse = 0;
+        while (temp > 0) {
+            let digit = temp % 10;
+            reverse = reverse * 10 + digit;
+            temp = Math.floor(temp / 10);
+        }
+        if (num === reverse)
+            console.log(num + " is a Palindrome Number");
+        else
+            console.log(num + " is not a Palindrome Number");
+
+        // 13. Check Prime Number
+        num = 17;
+        let prime = true;
+        for (let i = 2; i < num; i++) {
+            if (num % i === 0) {
+                prime = false;
+                break;
+            }
+        }
+        console.log(prime ? "Prime" : "Not Prime");
+
+        // 14. Fibonacci Series
+        console.log("Fibonacci series:");
+        N = 7;
+        let a1 = 0, a2 = 1;
+        for (let i = 1; i <= N; i++) {
+            console.log(a1);
+            let a3 = a1 + a2;
+            a1 = a2;
+            a2 = a3;
+        }
+
+        // 15. Multiplication Table
+        num = 5;
+        for (let i = 1; i <= 10; i++)
+            console.log(`${num} x ${i} = ${num * i}`);
+
+        // 16. Print Prime Numbers up to N
+        console.log("16. Print Prime Nuber");
+        N = 20;
+        for (let i = 2; i <= N; i++) {
+            let prime2 = true;
+            for (let j = 2; j <= Math.sqrt(i); j++) {
+                if (i % j === 0) {
+                    prime2 = false;
+                    break;
+                }
+            }
+            if (prime2) console.log(i);
+        }
+
+        console.log("17. Print Armstrong Numbers ")
+        // 17. Print Armstrong Numbers 
+        for (let numm = 1; numm <= 500; numm++) {
+            let temp = numm, sum = 0;
+            let digits = 0, t = temp;
+
+            while (t > 0) {
+                digits++;
+                t = Math.floor(t / 10);
+            }
+
+            while (temp > 0) {
+                let digit = temp % 10;
+                let power = 1;
+                for (let i = 1; i <= digits; i++) {
+                    power *= digit;
+                }
+                sum += power;
+                temp = Math.floor(temp / 10);
+            }
+
+            if (sum === numm) console.log(numm);
+        }
+
+        console.log("18. Perfect Numbers in a Range ")
+        // 18. Perfect Numbers in a Range
+        for (let numP = 1; numP <= 500; numP++) {
+            let sum = 0;
+            for (let i = 1; i < numP; i++) {
+                if (numP % i === 0) sum += i;
+            }
+            if (sum === numP) console.log(numP);
+        }
+
+        console.log("19. Strong Numbers in a Range  ")
+        // 19. Strong Numbers in a Range
+        for (let numS = 1; numS <= 500; numS++) {
+            let temp = numS, sum = 0;
+            while (temp > 0) {
+                let digit = temp % 10;
+                let fact = 1;
+                for (let i = 1; i <= digit; i++) {
+                    fact *= i;
+                }
+                sum += fact;
+                temp = Math.floor(temp / 10);
+            }
+            if (sum === numS) console.log(numS);
+        }
+
+        console.log("20. Print 28 Number Divisors")
+        // 20. Print 28 Number Divisors
+        num = 28;
+        for (let i = 1; i <= num; i++) {
+            if (num % i === 0) console.log(i);
+        }
+
+        // 21. Find HCF of Two Numbers
+        let a = 36, b = 60, hcf = 1;
+        for (let i = 1; i <= a && i <= b; i++) {
+            if (a % i === 0 && b % i === 0) hcf = i;
+        }
+        console.log("HCF:", hcf);
+
+        // 22. Find LCM of Two Numbers 
+        let aa = 36, bb = 60;
+        let l = 1;
+        for (let i = 1; i <= aa && i <= bb; i++) {
+            if (aa % i === 0 && bb % i === 0) l = i;
+        }
+        let lcm = (aa * bb) / l;
+        console.log("LCM:", lcm);
+
+
+        console.log("Pattern")
+        // Number Pyramid Pattern
+        let rows = 5;
+        for (let i = 1; i <= rows; i++) {
+            let line = "";
+            for (let j = 1; j <= i; j++) line += j + " ";
+            console.log(line);
+        }
+
+        // Star Triangle Pattern
+        rows = 5;
+        for (let i = 1; i <= rows; i++) {
+            let line = "";
+            for (let j = 1; j <= i; j++) line += "* ";
+            console.log(line);
+        }
+        console.log("\n");
+
+        // Hollow Square Pattern
+        let n = 5;
+        for (let i = 1; i <= n; i++) {
+            let line = "";
+            for (let j = 1; j <= n; j++) {
+                if (i == 1 || i == n || j == 1 || j == n) line += "* ";
+                else line += "  ";
+            }
+            console.log(line);
+        }
+
+        // Diamond Pattern
+        n = 5;
+        // Upper 
+        for (let i = 1; i <= n; i++) {
+            let row = "";
+            for (let j = i; j < n; j++) row += " ";
+            for (let k = 1; k <= 2 * i - 1; k++) row += "*";
+            console.log(row);
+        }
+        // Lower 
+        for (let i = n - 1; i >= 1; i--) {
+            let row = "";
+            for (let j = n; j > i; j--) row += " ";
+            for (let k = 1; k <= 2 * i - 1; k++) row += "*";
+            console.log(row);
+        }
+
+        // Pascal’s Triangle
+        let rowsP = 5;
+        for (let i = 0; i < rowsP; i++) {
+            let num = 1, line = "";
+            line += " ".repeat(rowsP - i);
+            for (let j = 0; j <= i; j++) {
+                line += num + " ";
+                num = num * (i - j) / (j + 1);
+            }
+            console.log(line);
+        }
+
+        // Print Alphabets A–Z
+        for (let i = 65; i <= 90; i++) {
+            console.log(String.fromCharCode(i));
+        }
+
+        // Print ASCII Values
+        for (let i = 65; i <= 90; i++) {
+            console.log(String.fromCharCode(i) + " = " + i);
+        }
+
+        // Power of a Number
+        let base = 2, exp = 5, result = 1;
+        for (let i = 1; i <= exp; i++) {
+            result *= base;
+        }
+        console.log("Power:", result);
+    </script>
+</body>
+
+</html>
