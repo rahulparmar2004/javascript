@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Find Largest Digit in a Number 
+        function largestDigit(num) {
+            let max = 0;
+            while (num > 0) {
+                let digit = num % 10;
+                if (digit > max){
+                     max = digit;
+                }
+                num = Math.floor(num / 10);
+            }
+            return max;
+        }
+        console.log("Largest Digit:", largestDigit(58326));
+
+
+        // Fibonacci Sequence
+        function fibonacci(n) {
+            if (n <= 1){ 
+                return n;
+            }
+            return fibonacci(n - 1) + fibonacci(n - 2);
+        }
+        for (let i = 0; i < 6; i++) 
+        console.log(fibonacci(i));
+
+
+        // Count Occurrences of Characters 
+        function countChar(str, ch) {
+            let count = 0;
+            for (let i = 0; i < str.length; i++) {
+                if (str[i] === ch){
+                     count++;
+                }
+            }
+            return count;
+        }
+        console.log("Occurrences:", countChar("javascript", "a"));
+
+
+        // Reverse a Number
+        function reverseNumber(num) {
+            let rev = 0;
+            while (num > 0) {
+                let digit = num % 10;
+                rev = rev * 10 + digit;
+                num = Math.floor(num / 10);
+            }
+            return rev;
+        }
+        console.log("Reversed Number:", reverseNumber(12345));
+
+
+    </script>
+</body>
+
+</html>
