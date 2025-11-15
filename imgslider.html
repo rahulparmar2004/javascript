@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial;
+            background: #f0f0f0;
+            margin-top: 60px;
+        }
+
+        #sliderBox {
+            background: white;
+            padding: 20px;
+            width: 450px;
+            margin: auto;
+            border-radius: 15px;
+            box-shadow: 0 0 10px gray;
+        }
+
+        img {
+            width: 400px;
+            height: 350px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 10px;
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="sliderBox">
+        <img id="sliderImg" src="" alt="image">
+        <p id="caption"></p>
+
+        <button onclick="prevImg()">Previous</button>
+        <button onclick="nextImg()">Next</button>
+    </div>
+
+    <script>
+        const images = [
+            { src: "https://public-files.gumroad.com/variants/xu0ru64zv48co3u405plh9kvgx3h/baaca0eb0e33dc4f9d45910b8c86623f0144cea0fe0c2093c546d17d535752eb", caption: "Beautiful View 1" },
+            { src: "https://img.freepik.com/premium-photo/beautiful-ai-generate-images_767081-423.jpg", caption: "Nature Scene 2" },
+            { src: "https://img.freepik.com/premium-photo/amazingly-beautiful-pictures-made-with-ai-generated_954226-337051.jpg", caption: "Amazing Photo 3" },
+            { src: "https://img.freepik.com/premium-photo/beautiful-wallpapers-textures-backgrounds-generative-ai_123447-24613.jpg?w=2000", caption: "Wonderful View 4" }
+        ];
+
+        let index = 0;
+
+        function showImage() {
+            document.getElementById("sliderImg").src = images[index].src;
+            document.getElementById("caption").textContent = images[index].caption;
+        }
+
+        function nextImg() {
+            index++;
+            if (index >= images.length) index = 0;
+            showImage();
+        }
+
+        function prevImg() {
+            index--;
+            if (index < 0) index = images.length - 1;
+            showImage();
+        }
+
+        showImage(); // first image show
+        //Time set
+        setInterval(nextImg, 1000);
+
+    </script>
+</body>
+
+</html>
