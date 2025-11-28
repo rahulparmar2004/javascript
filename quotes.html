@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown & Quotes App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #ffffff; /* plain white background */
+            color: #333; /* dark text */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: #f0f0f0; /* light grey container */
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+
+        #countdown {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #quote {
+            font-style: italic;
+            margin: 15px 0;
+        }
+
+        #author {
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Countdown Timer</h1>
+        <div id="countdown">
+            <span id="days">00</span> Days
+            <span id="hours">00</span> Hours
+            <span id="minutes">00</span> Minutes
+            <span id="seconds">00</span> Seconds
+        </div>
+
+        <h2>Motivational Quote</h2>
+        <p id="quote">Click the button to see a quote!</p>
+        <p id="author"></p>
+        <button id="newQuoteBtn">New Quote</button>
+    </div>
+
+    <script>
+        // Countdown Timer
+        const countdownDate = new Date("2025-12-31T23:59:59").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").textContent = days.toString().padStart(2, '0');
+            document.getElementById("hours").textContent = hours.toString().padStart(2, '0');
+            document.getElementById("minutes").textContent = minutes.toString().padStart(2, '0');
+            document.getElementById("seconds").textContent = seconds.toString().padStart(2, '0');
+
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById("countdown").textContent = "EXPIRED";
+            }
+        }
+
+        const countdownInterval = setInterval(updateCountdown, 1000);
+
+        // Quotes with authors
+        const quotes = [
+            { text: "Believe you can and you're halfway there.", author: "Theodore Roosevelt" },
+            { text: "Don't watch the clock; do what it does. Keep going.", author: "Sam Levenson" },
+            { text: "The harder you work for something, the greater you'll feel when you achieve it.", author: "Mahim joshi" },
+            { text: "Dream it. Wish it. Do it.", author: "Yagnik dave" },
+            { text: "Stay positive, work hard, make it happen.", author: "Mihir" },
+            { text: "Success is not final, failure is not fatal: it is the courage to continue that counts.", author: "Winston Churchill" },
+            { text: "Dream it. Wish it. Do it.", author: "Yagnik dave" },
+            { text: "Stay positive, work hard, make it happen.", author: "Mihir" },
+            { text: "Success is not final, failure is not fatal: it is the courage to continue that counts.", author: "Winston Churchill" },
+            { text: "It always seems impossible until it’s done.", author: "Nelson Mandela" }
+        ];
+
+        function showRandomQuote() {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            const quote = quotes[randomIndex];
+            document.getElementById("quote").textContent = `"${quote.text}"`;
+            document.getElementById("author").textContent = `— ${quote.author}`;
+        }
+
+        document.getElementById("newQuoteBtn").addEventListener("click", showRandomQuote);
+    </script>
+</body>
+
+</html>
