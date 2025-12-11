@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All OOP Tasks</title>
+</head>
+
+<body>
+    <script>
+
+        // ------------------- Q1: BankAccount Class -------------------
+        class BankAccount {
+            constructor(accountNumber, balance = 0) {
+                this.accountNumber = accountNumber;
+                this.balance = balance;
+            }
+
+            deposit(amount) {
+                if (amount > 0) {
+                    this.balance += amount;
+                    console.log(`Account ${this.accountNumber}: Deposited ₹${amount}. New Balance ₹${this.balance}`);
+                } else {
+                    console.log("Deposit amount must be positive!");
+                }
+            }
+
+            withdraw(amount) {
+                if (amount <= 0) {
+                    console.log("Withdraw amount must be positive!");
+                } else if (amount > this.balance) {
+                    console.log("Insufficient balance!");
+                } else {
+                    this.balance -= amount;
+                    console.log(`Account ${this.accountNumber}: Withdrawn ₹${amount}. Balance ₹${this.balance}`);
+                }
+            }
+        }
+
+        const acc1 = new BankAccount(101, 500);
+        const acc2 = new BankAccount(102, 1000);
+
+        acc1.deposit(300);
+        acc1.withdraw(100);
+
+        acc2.deposit(500);
+        acc2.withdraw(1200);
+
+
+        // ------------------- Q2: Vehicle & Car Class -------------------
+        class Vehicle {
+            constructor(make, model, year) {
+                this.make = make;
+                this.model = model;
+                this.year = year;
+            }
+
+            displayDetails() {
+                console.log(`Vehicle: ${this.year} ${this.make} ${this.model}`);
+            }
+        }
+
+        class Car extends Vehicle {
+            constructor(make, model, year, doors) {
+                super(make, model, year);
+                this.doors = doors;
+            }
+
+            displayDetails() {
+                console.log(`Car: ${this.year} ${this.make} ${this.model}, Doors: ${this.doors}`);
+            }
+        }
+
+        const myCar = new Car("Toyota", "Corolla", 2022, 4);
+        myCar.displayDetails();
+
+
+        // ------------------- Q3: Rectangle Class -------------------
+        class Rectangle {
+            constructor(width, height) {
+                this.width = width;
+                this.height = height;
+            }
+
+            getArea() {
+                return this.width * this.height;
+            }
+
+            getPerimeter() {
+                return 2 * (this.width + this.height);
+            }
+        }
+
+        const rec = new Rectangle(10, 5);
+        console.log("Rectangle Area:", rec.getArea());
+        console.log("Rectangle Perimeter:", rec.getPerimeter());
+
+
+        // ------------------- Q4: Person Class -------------------
+        class Person {
+            constructor(name, age, country) {
+                this.name = name;
+                this.age = age;
+                this.country = country;
+            }
+
+            displayDetails() {
+                console.log(`Name: ${this.name}, Age: ${this.age}, Country: ${this.country}`);
+            }
+        }
+
+        const p1 = new Person("Mihir", 25, "USA");
+        const p2 = new Person("Mahim", 30, "Canada");
+
+        p1.displayDetails();
+        p2.displayDetails();
+
+    </script>
+
+</body>
+
+</html>
