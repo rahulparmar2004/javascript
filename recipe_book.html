@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recipe Book with crud</title>
+    <title>Recipe Book</title>
     <style>
         * {
             box-sizing: border-box;
@@ -88,7 +88,6 @@
 
         .recipeList {
             margin-top: 35px;
-            width: 60%;
         }
 
         .recipeList h3 {
@@ -147,6 +146,14 @@
             background: #e74c3c;
         }
 
+        .category.Salad {
+            background: #16a085;
+        }
+
+        .category.Soup {
+            background: #2980b9;
+        }
+
         .actions {
             display: flex;
             justify-content: flex-end;
@@ -181,14 +188,7 @@
             background: #c0392b;
         }
 
-        #searchBar {
-            margin-top: 10px;
-            padding: 10px;
-            width: 100%;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-        }
-
+        #searchBar,
         #filterCategory {
             margin-top: 10px;
             padding: 10px;
@@ -235,12 +235,15 @@
 
         <button id="addRecipe" onclick="addRecipe()">Add Recipe</button>
 
-        <input type="text" id="searchBar" placeholder="Search by recipe or chef" onkeyup="renderRecipes()">
+        <input type="text" id="searchBar" placeholder="Search by recipe, chef, or ingredients"
+            onkeyup="renderRecipes()">
         <select id="filterCategory" onchange="renderRecipes()">
             <option value="All">All Categories</option>
             <option value="Appetizer">Appetizer</option>
             <option value="Main">Main</option>
             <option value="Dessert">Dessert</option>
+            <option value="Salad">Salad</option>
+            <option value="Soup">Soup</option>
         </select>
 
         <div class="recipeList">
@@ -277,12 +280,16 @@
 
             localStorage.setItem("RecipeObj", JSON.stringify(RecipeObj));
             renderRecipes();
+            clearForm();
+        }
 
+        function clearForm() {
             document.querySelector("#chefName").value = '';
             document.querySelector("#recipeName").value = '';
             document.querySelector("#description").value = '';
             document.querySelector("#dateAdded").value = '';
             document.querySelector("#recipeImage").value = '';
+            document.querySelector("#category").value = 'Appetizer';
         }
 
         function renderRecipes() {
@@ -293,13 +300,20 @@
             let filter = document.querySelector("#filterCategory").value;
 
             RecipeObj.forEach((recipe, index) => {
-                if ((recipe.name.toLowerCase().includes(searchText) || recipe.chef.toLowerCase().includes(searchText))
-                    && (filter === "All" || recipe.category === filter)) {
-
+                if (
+                    (recipe.name.toLowerCase().includes(searchText) ||
+                        recipe.chef.toLowerCase().includes(searchText) ||
+                        recipe.description.toLowerCase().includes(searchText)) &&
+                    (filter === "All" || recipe.category === filter)
+                ) {
                     let div = document.createElement("div");
                     div.classList.add("List");
 
-                    let formattedDate = new Date(recipe.date).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+                    let formattedDate = new Date(recipe.date).toLocaleDateString('en-GB', {
+                        day: '2-digit',
+                        month: 'short',
+                        year: 'numeric'
+                    });
 
                     div.innerHTML = `
                     ${recipe.image ? `<img src="${recipe.image}" class="recipe-img">` : ''}
