@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>COVID-19 Tracker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #020617, #0f172a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 32px;
+            color: #38bdf8;
+            margin-bottom: 25px;
+            animation: fadeDown 1s ease;
+            /* text-shadow: 0 0 10px #38bdf8; */
+        }
+
+        .search-box {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 60%;
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            background: #38bdf8;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #0ea5e9;
+        }
+
+        #error {
+            text-align: center;
+            margin-top: 10px;
+            color: #f87171;
+            font-weight: bold;
+            display: none;
+        }
+
+        .loader {
+            display: none;
+            margin: 20px auto;
+            width: 50px;
+            height: 50px;
+            border: 5px solid #334155;
+            border-top: 5px solid #38bdf8;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .card-box {
+            display: none;
+            background: linear-gradient(145deg, #0f172a, #020617);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.5), 0 0 60px rgba(239, 68, 68, 0.3);
+            text-align: center;
+            animation: fadeUp 0.8s ease forwards;
+        }
+
+        .card-box h2 {
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: #38bdf8;
+            text-shadow: 0 0 10px #38bdf8;
+        }
+
+        .stats {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .stat {
+            flex: 1 1 150px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 15px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .stat:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.7);
+        }
+
+        .stat h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .stat p {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .cases {
+            color: #facc15;
+        }
+
+        .active {
+            color: #fb7185;
+        }
+
+        .recovered {
+            color: #4ade80;
+        }
+
+        .deaths {
+            color: #f87171;
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+
+        @media(max-width:600px) {
+            .stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>🦠 COVID-19 Live Tracker</h1>
+
+        <div class="search-box">
+            <input type="text" id="country" placeholder="Enter country name (India, USA)">
+            <button onclick="getData()">Search</button>
+        </div>
+
+        <div id="error">❌ Country not found</div>
+        <div class="loader" id="loader"></div>
+
+
+        <div class="card-box" id="card-box">
+            <h2 id="country-name">Country</h2>
+            <div class="stats">
+                <div class="stat cases">
+                    <h3>Total Cases</h3>
+                    <p id="cases">0</p>
+                </div>
+                <div class="stat active">
+                    <h3>Active</h3>
+                    <p id="active">0</p>
+                </div>
+                <div class="stat recovered">
+                    <h3>Recovered</h3>
+                    <p id="recovered">0</p>
+                </div>
+                <div class="stat deaths">
+                    <h3>Deaths</h3>
+                    <p id="deaths">0</p>
+                </div>
+            </div>
+        </div>
+
+        <footer>Data Source : disease.sh API</footer>
+    </div>
+
+    <script>
+        function getData() {
+            const country = document.getElementById("country").value.trim();
+            const loader = document.getElementById("loader");
+            const cardBox = document.getElementById("card-box");
+            const error = document.getElementById("error");
+
+            if (country === "") {
+                error.style.display = "block";
+                error.innerText = "⚠ Please enter country name";
+                cardBox.style.display = "none";
+                return;
+            }
+
+            error.style.display = "none";
+            cardBox.style.display = "none";
+            loader.style.display = "block";
+
+            fetch(`https://disease.sh/v3/covid-19/countries/${country}`)
+                .then(res => {
+                    if (!res.ok) throw new Error("Not Found");
+                    return res.json();
+                })
+                .then(data => {
+                    loader.style.display = "none";
+                    cardBox.style.display = "block";
+                    document.getElementById("country-name").innerText = data.country;
+
+                    document.getElementById("cases").innerText = data.cases.toLocaleString();
+                    document.getElementById("active").innerText = data.active.toLocaleString();
+                    document.getElementById("recovered").innerText = data.recovered.toLocaleString();
+                    document.getElementById("deaths").innerText = data.deaths.toLocaleString();
+                })
+                .catch(() => {
+                    loader.style.display = "none";
+                    error.style.display = "block";
+                    error.innerText = "❌ Country not found";
+                });
+        }
+    </script>
+
+</body>
+
+</html>
